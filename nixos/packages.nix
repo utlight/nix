@@ -5,21 +5,31 @@
   ...
 }:
 {
-  environment.systemPackages = with pkgs; [
-    #vm
-    spice-vdagent
+  nixpkgs.config.allowUnfree = true;
 
-    home-manager
+  services.flatpak.enable = true;
 
-    zen_browser.packages.x86_64-linux.default
+  programs.steam.enable = true;
 
-    #development
-    jetbrains-toolbox
-    azure-functions-core-tools
-    dotnetCorePackages.dotnet_8.sdk
-    azurite
-    zed-editor
-    nil
-    nixd
-  ];
+  environment.systemPackages =
+    (with pkgs; [
+      #development
+      dotnetCorePackages.dotnet_8.sdk
+
+      #others
+      spice-vdagent
+      home-manager
+    ])
+    ++ (with unstable_pkgs; [
+      #development
+      jetbrains-toolbox
+      azure-functions-core-tools
+      azurite
+      zed-editor
+      nil
+      nixd
+
+      #web
+      zen_browser.packages.x86_64-linux.default
+    ]);
 }

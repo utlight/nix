@@ -21,25 +21,26 @@
         "type": "github"
       }
     },
-    "nixpkgs": {
+    "nixos_hardware": {
       "locked": {
-        "lastModified": 1765472234,
-        "narHash": "sha256-9VvC20PJPsleGMewwcWYKGzDIyjckEz8uWmT0vCDYK0=",
-        "owner": "nixos",
-        "repo": "nixpkgs",
-        "rev": "2fbfb1d73d239d2402a8fe03963e37aab15abe8b",
+        "lastModified": 1764440730,
+        "narHash": "sha256-ZlJTNLUKQRANlLDomuRWLBCH5792x+6XUJ4YdFRjtO4=",
+        "owner": "NixOS",
+        "repo": "nixos-hardware",
+        "rev": "9154f4569b6cdfd3c595851a6ba51bfaa472d9f3",
         "type": "github"
       },
       "original": {
-        "owner": "nixos",
-        "ref": "nixos-unstable",
-        "repo": "nixpkgs",
+        "owner": "NixOS",
+        "ref": "master",
+        "repo": "nixos-hardware",
         "type": "github"
       }
     },
     "root": {
       "inputs": {
         "home_manager": "home_manager",
+        "nixos_hardware": "nixos_hardware",
         "stable_pkgs": "stable_pkgs",
         "unstable_pkgs": "unstable_pkgs",
         "zen_browser": "zen_browser"
@@ -79,7 +80,9 @@
     },
     "zen_browser": {
       "inputs": {
-        "nixpkgs": "nixpkgs"
+        "nixpkgs": [
+          "unstable_pkgs"
+        ]
       },
       "locked": {
         "lastModified": 1765772419,

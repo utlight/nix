@@ -7,8 +7,11 @@
       inputs.nixpkgs.follows = "stable_pkgs";
     };
 
+    nixos_hardware.url = "github:NixOS/nixos-hardware/master";
+
     zen_browser = {
       url = "github:youwen5/zen-browser-flake";
+      inputs.nixpkgs.follows = "unstable_pkgs";
     };
   };
 
@@ -23,6 +26,7 @@
       };
       modules = [
         ./nixos/configuration.nix
+        inputs.nixos_hardware.nixosModules.lenovo-legion-16aph8
       ];
     };
 
