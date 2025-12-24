@@ -16,7 +16,10 @@
       #development
       dotnetCorePackages.dotnet_8.sdk
 
+      teams-for-linux
+
       #others
+      gnome-boxes
       spice-vdagent
       home-manager
     ])
