@@ -7,18 +7,22 @@
 {
   nixpkgs.config.allowUnfree = true;
 
-  services.flatpak.enable = true;
-
-  programs.steam.enable = true;
+  programs.steam = {
+    enable = true;
+    gamescopeSession = {
+      enable = true;
+    };
+  };
 
   environment.systemPackages =
     (with pkgs; [
-      #development
-      dotnetCorePackages.dotnet_8.sdk
+      #desktop
+      xwayland-satellite
+      fuzzel
+      alacritty
+      afterglow-cursors-recolored
 
-      teams-for-linux
-
-      #others
+      #other
       gnome-boxes
       spice-vdagent
       home-manager
@@ -27,10 +31,18 @@
       #development
       jetbrains-toolbox
       azure-functions-core-tools
+      azure-cli
       azurite
       zed-editor
       nil
       nixd
+
+      #work
+      teams-for-linux
+
+      #gaming
+      protonup-qt
+      mangohud
 
       #web
       zen_browser.packages.x86_64-linux.default

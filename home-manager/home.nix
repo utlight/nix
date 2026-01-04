@@ -1,4 +1,4 @@
-{ home_state_version, ... }:
+{ home_state_version, pkgs, ... }:
 {
   imports = [
     ./modules/modules.nix
@@ -8,5 +8,6 @@
     username = "utlight";
     homeDirectory = "/home/utlight";
     stateVersion = home_state_version;
+    sessionVariables.TERMINAL = "alacritty";
   };
 }
