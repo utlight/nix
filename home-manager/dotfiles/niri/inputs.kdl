@@ -1,0 +1,13 @@
+input {
+    keyboard {
+        xkb {
+            layout "us,ua"
+            options "grp:win_space_toggle"
+        }
+    }
+
+    mouse {
+        accel-profile "flat"
+    }
+    focus-follows-mouse max-scroll-amount="0%"
+}

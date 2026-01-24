@@ -3,11 +3,15 @@
     enable = true;
     completion.enable = true;
     shellAliases = {
-      switch = "sudo nixos-rebuild switch --flake ~/.config/nix && home-manager switch --flake ~/.config/nix/#utlight";
-      boot = "sudo nixos-rebuild boot --flake ~/.config/nix && home-manager switch --flake ~/.config/nix/#utlight";
+      #nixos
+      rebuild-switch = "sudo nixos-rebuild switch --flake ~/.config/nix";
+      rebuild-boot = "sudo nixos-rebuild boot --flake ~/.config/nix";
+      flake-update = "sudo nix flake update --flake ~/.config/nix";
+      home-switch = "home-manager switch --flake ~/.config/nix/#utlight -b backup";
 
-      vpnclient-up = ''sudo ~/.softehter/vpnclient/vpnclient start && printf "AccountConnect tpdev\n" | ~/.softehter/vpnclient/vpncmd localhost /CLIENT'';
-      vpnclient-down = ''printf "AccountDisconnect tpdev\n" | ~/.softehter/vpnclient/vpncmd localhost /CLIENT && sudo ~/.softehter/vpnclient/vpnclient stop'';
+      #softether
+      vpnclient-up = ''sudo ~/.softether/build/vpnclient start && printf "AccountConnect tpdev\n" | ~/.softether/build/vpncmd localhost /CLIENT'';
+      vpnclient-down = ''printf "AccountDisconnect tpdev\n" | ~/.softether/build/vpncmd localhost /CLIENT && sudo ~/.softether/build/vpnclient stop'';
     };
   };
 }

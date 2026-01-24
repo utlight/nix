@@ -2,7 +2,7 @@
   networking.networkmanager.enable = true;
   networking.hostName = "nixos";
 
-  networking.firewall.enable = true;
+  networking.firewall.enable = false;
 
   services.resolved.enable = true;
 
@@ -13,6 +13,10 @@
     routes = [
       {
         Destination = "20.0.0.0/8";
+        Gateway = "192.168.30.1";
+      }
+      {
+        Destination = "13.0.0.0/8";
         Gateway = "192.168.30.1";
       }
     ];

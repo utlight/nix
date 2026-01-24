@@ -1,8 +1,9 @@
 {
   imports = [
     ./git.nix
+    ./neovim.nix
     ./zen-browser.nix
-    ./waybar.nix
+    ./zed.nix
     ./yazi.nix
   ];
 }

@@ -1,50 +1,48 @@
-{
-  pkgs,
-  unstable_pkgs,
-  zen_browser,
-  ...
-}:
+{ pkgs, zen_browser, ... }:
 {
   nixpkgs.config.allowUnfree = true;
 
-  programs.steam = {
-    enable = true;
-    gamescopeSession = {
-      enable = true;
-    };
-  };
+  services.flatpak.enable = true;
+  programs.steam.enable = true;
 
-  environment.systemPackages =
-    (with pkgs; [
-      #desktop
-      xwayland-satellite
-      fuzzel
-      alacritty
-      afterglow-cursors-recolored
+  fonts.packages = [ pkgs.nerd-fonts.jetbrains-mono ];
 
-      #other
-      gnome-boxes
-      spice-vdagent
-      home-manager
-    ])
-    ++ (with unstable_pkgs; [
-      #development
-      jetbrains-toolbox
-      azure-functions-core-tools
-      azure-cli
-      azurite
-      zed-editor
-      nil
-      nixd
+  environment.unixODBCDrivers = with pkgs.unixODBCDrivers; [
+    msodbcsql18
+  ];
 
-      #work
-      teams-for-linux
+  environment.systemPackages = with pkgs; [
+    #development
+    jetbrains-toolbox
+    bruno
+    azure-functions-core-tools
+    azure-cli
+    azurite
+    gh
+    dotnetCorePackages.dotnet_8.sdk
 
-      #gaming
-      protonup-qt
-      mangohud
+    #gaming
+    discord
+    protonup-qt
+    mangohud
 
-      #web
-      zen_browser.packages.x86_64-linux.default
-    ]);
+    #desktop
+    xwayland-satellite
+    xdg-desktop-portal
+    wl-clipboard
+    alacritty
+    ghostty
+    fuzzel
+    afterglow-cursors-recolored
+    fastfetch
+    mako
+    loupe
+    nautilus
+
+    #other
+    teams-for-linux
+    gnome-boxes
+    zen_browser.packages.x86_64-linux.default
+    home-manager
+  ];
 }

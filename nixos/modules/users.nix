@@ -6,8 +6,6 @@
       "networkmanager"
       "wheel"
       "kvm"
-      "libvirtd"
-      "vmware"
     ];
   };
 }

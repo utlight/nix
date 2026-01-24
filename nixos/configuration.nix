@@ -11,5 +11,9 @@
     "flakes"
   ];
 
+  environment.variables = {
+    EDITOR = "zeditor";
+  };
+
   system.stateVersion = "25.11";
 }
