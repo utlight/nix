@@ -12,19 +12,6 @@
     };
   };
 
-  programs.distrobox = {
-    enable = true;
-    enableSystemdUnit = true;
-    containers = {
-      development = {
-        image = "fedora-toolbox:43";
-        additional_packages = "systemd git gh neovim";
-        entry = true;
-        init = true;
-      };
-    };
-  };
-
   xdg.desktopEntries = {
     teams-for-linux = {
       name = "Teams";

@@ -4,8 +4,8 @@
     enable = true;
     settings.vim = {
       luaConfigRC.config = ''require("config")'';
-      # luaConfigRC.keymaps = ''require("config.keymaps")'';
-      # luaConfigRC.plugins = ''require("config.plugins.telescope")'';
+      # luaConfigRC.dbui-preview = ''require("config.lua.dbui-preview").setup {}'';
+      # luaConfigRC.dadbod-ui = ''require("config.lua.dadbod-ui").setup {}'';
 
       theme.enable = true;
       theme.name = "rose-pine";
@@ -19,9 +19,13 @@
         nvim-treesitter
         nvim-treesitter-parsers.lua
         nvim-treesitter-parsers.nix
+        nvim-treesitter-parsers.bash
+        nvim-treesitter-parsers.c_sharp
+        nvim-treesitter-parsers.sql
 
         #telescope
         plenary-nvim
+        project-nvim
         telescope-nvim
         telescope-ui-select-nvim
         telescope-fzf-native-nvim
@@ -33,30 +37,36 @@
         blink-cmp
         conform-nvim
         luasnip
-        friendly-snippets
+
+        roslyn-nvim
+        gitsigns-nvim
+        diffview-nvim
 
         #mini
         mini-pairs
-        # mini-ai
-        # mini-surround
         mini-splitjoin
 
         tiny-inline-diagnostic-nvim
-        # nvim-scrollbar
+        toggleterm-nvim
+        dashboard-nvim
+        better-escape-nvim
         # substitute-nvim
-        # satellite-nvim
 
         #help
         guess-indent-nvim
         which-key-nvim
+        yazi-nvim
       ];
 
       extraPackages = with pkgs; [
         ripgrep
         lua-language-server
+        roslyn-ls
         stylua
         nixd
         alejandra
+
+        sqlcmd
       ];
     };
   };

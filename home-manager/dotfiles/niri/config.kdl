@@ -8,10 +8,8 @@ environment {
     ELECTRON_OZONE_PLATFORM_HINT "auto"
 }
 
-spawn-at-startup "mako"
-
 cursor {
-    xcursor-theme "Afterglow-Recolored-Dracula-Cyan"
+    xcursor-theme "Afterglow-Recolored-Original-joris4"
 }
 
 hotkey-overlay {

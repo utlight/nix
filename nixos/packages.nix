@@ -18,7 +18,6 @@
     azure-functions-core-tools
     azure-cli
     azurite
-    gh
     dotnetCorePackages.dotnet_8.sdk
 
     #gaming
@@ -30,7 +29,6 @@
     xwayland-satellite
     xdg-desktop-portal
     wl-clipboard
-    alacritty
     ghostty
     fuzzel
     afterglow-cursors-recolored
@@ -41,7 +39,6 @@
 
     #other
     teams-for-linux
-    gnome-boxes
     zen_browser.packages.x86_64-linux.default
     home-manager
   ];

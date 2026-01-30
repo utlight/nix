@@ -1,6 +1,6 @@
 {
   imports = [
-    ./bash.nix
+    ./zsh.nix
     ./audio.nix
     ./networking.nix
     ./users.nix

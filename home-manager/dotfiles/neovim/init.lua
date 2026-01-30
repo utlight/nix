@@ -2,18 +2,18 @@ vim.o.number = true
 vim.o.relativenumber = true
 vim.o.mouse = 'a'
 vim.o.showmode = false
-vim.o.breakindent = true
 vim.o.undofile = true
 vim.o.ignorecase = true
 vim.o.smartcase = true
 vim.o.updatetime = 250
 vim.o.timeoutlen = 300
 vim.o.splitright = true
+vim.o.inccommand = 'split'
 vim.o.splitbelow = true
--- vim.o.inccommand = 'split'
 vim.o.scrolloff = 10
 vim.o.cursorline = true
 vim.o.confirm = true
+vim.o.wrap = false
 
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
@@ -21,14 +21,24 @@ vim.g.have_nerd_font = true
 
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
-vim.keymap.set({ 'i', 'c' }, 'jk', '<Esc>')
-vim.keymap.set({ 'i', 'c' }, 'kj', '<Esc>')
 vim.keymap.set('n', '<C-d>', '<C-d>zz')
 vim.keymap.set('n', '<C-u>', '<C-u>zz')
+vim.keymap.set('n', '<leader>Y', '<cmd>Yazi toggle<CR>', { desc = 'Open [Y]azi' })
 
--- vim.keymap.set('n', 's', require('substitute').operator)
--- vim.keymap.set('n', 'ss', require('substitute').line)
--- vim.keymap.set('x', 's', require('substitute').visual)
+vim.keymap.set('n', '<leader>gd', function()
+  local view = require('diffview.lib').get_current_view()
+
+  if view then
+    vim.cmd 'DiffviewClose'
+  else
+    vim.cmd 'DiffviewOpen'
+  end
+end, { desc = 'Toggle Git diff' })
+
+vim.keymap.set('n', '<C-h>', '<C-w>h')
+vim.keymap.set('n', '<C-j>', '<C-w>j')
+vim.keymap.set('n', '<C-k>', '<C-w>k')
+vim.keymap.set('n', '<C-l>', '<C-w>l')
 
 vim.schedule(function()
   vim.o.clipboard = 'unnamedplus'
@@ -42,12 +52,32 @@ require('which-key').setup {
 }
 
 require('mini.pairs').setup {}
--- require('mini.ai').setup {}
 require('mini.splitjoin').setup {}
 
 -- require('substitute').setup {}
--- require('mini.surround').setup {}
+require('dashboard').setup {}
 require('tiny-inline-diagnostic').setup {}
+require('project').setup {}
+require('gitsigns').setup {}
+require('diffview').setup {}
+
+require('toggleterm').setup {}
+vim.keymap.set('n', '<leader>t', '<cmd>ToggleTerm direction=float<CR>', { desc = 'Open [T]erminal' })
+vim.keymap.set('t', '<leader>t', '<cmd>ToggleTerm<CR>')
+
+require('better_escape').setup {
+  default_mappings = false,
+  mappings = {
+    i = {
+      j = { k = '<Esc>' },
+      k = { j = '<Esc>' },
+    },
+    c = {
+      j = { k = '<C-c>' },
+      k = { j = '<C-c>' },
+    },
+  },
+}
 
 do
   local telescope = require 'telescope'
@@ -60,6 +90,7 @@ do
       ['ui-select'] = themes.get_dropdown(),
     },
     defaults = {
+      path_display = { 'tail' },
       mappings = {
         i = {
           ['jj'] = actions.close,
@@ -78,6 +109,7 @@ do
   telescope.load_extension 'fzf'
   telescope.load_extension 'ui-select'
 
+  vim.keymap.set('n', '<leader>sq', builtin.quickfix, { desc = '[S]earch [Q]uickfix' })
   vim.keymap.set('n', '<leader>sh', builtin.help_tags, { desc = '[S]earch [H]elp' })
   vim.keymap.set('n', '<leader>sk', builtin.keymaps, { desc = '[S]earch [K]eymaps' })
   vim.keymap.set('n', '<leader>sf', builtin.find_files, { desc = '[S]earch [F]iles' })
@@ -99,7 +131,6 @@ do
   local conform = require 'conform'
   conform.setup {
     notify_on_error = true,
-    format_on_save = false,
     formatters_by_ft = {
       lua = { 'stylua' },
       nix = { 'alejandra' },
@@ -143,7 +174,6 @@ do
     end,
   })
 
-  require('luasnip.loaders.from_vscode').lazy_load()
   require('lazydev').setup {
     library = {
       { path = 'luvit-meta/library', words = { 'vim%.uv' } },
@@ -158,10 +188,7 @@ do
     sources = {
       default = { 'lsp', 'path', 'snippets', 'lazydev' },
       providers = {
-        lazydev = {
-          module = 'lazydev.integrations.blink',
-          score_offset = 100,
-        },
+        lazydev = { module = 'lazydev.integrations.blink', score_offset = 100 },
       },
     },
   }
@@ -178,6 +205,7 @@ do
     },
   })
 
+  vim.lsp.enable 'roslyn'
   vim.lsp.enable 'lua_ls'
   vim.lsp.enable 'nixd'
 
